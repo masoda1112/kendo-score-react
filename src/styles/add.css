@@ -1,0 +1,65 @@
+.addgame{
+    background-color: whitesmoke;
+    min-height: calc(100vh - 60px);
+    padding-top: 50px;
+}
+
+/* input, select{
+    width: 70%;
+    max-width: 200px;
+} */
+
+.addgame-container{
+    width: 90%;
+    margin: auto;
+}
+.modal-list-title{
+    font-size: 30px;
+    margin-bottom: 80px;
+}
+
+.input-form{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.valid-attack-component,.attack-component, .foul-component, .action-component, .game-overview-wrapper{
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 5px 10px 10px 20px;
+}
+
+.close-btn{
+    margin: 0;
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.valid-attack-wrapper{
+    margin: 50px 0px;
+}
+
+.attack-wrapper{
+    margin-bottom: 50px;
+}
+
+.remove{
+    display: none;
+}
+
+.add-modal-btn{
+    color: #576871;
+}
+/* .input-form-time{
+    width: 200px;
+} */
+
+
+.selected-skill{
+    text-align: center;
+    font-size: 20px;
+}

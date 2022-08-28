@@ -1,8 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState } from "react"
+import ReactDOM from 'react-dom/client'
+import App from './pages/App'
+import reportWebVitals from './reportWebVitals'
+import axios from "axios"
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import Layout from './components/layout'
+import './styles/globals.css'
+import './styles/Search.css'
+import './styles/index.css'
+import './styles/userIndex.css'
+import './styles/games.css'
+import './styles/game.css'
+import './styles/add.css'
+import './styles/validator.css'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

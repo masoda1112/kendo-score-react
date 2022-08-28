@@ -1,0 +1,73 @@
+.home{
+}
+.home .top-section{
+    height: calc(100vh - 60px);
+    padding-top: 60px;
+    background-color:#efefef;
+}
+
+.home .top-section-container{
+    width: 90%;
+    margin: auto;
+}
+
+.ratio-item{
+    margin-bottom: 80px;
+}
+.ratio-title{
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.ratio-value{
+    font-size: 50px;
+    margin: 0px;
+}
+
+.ratio-unit{
+    font-size: 16px;
+}
+
+.pie-chart-item{
+    height: auto;
+    width: 90%;
+    margin: auto;
+    margin-top: 100px;
+    padding-bottom: 30px;
+}
+
+.pie-chart-title{
+    margin: auto;
+    margin-bottom: 60px;
+    font-size: 18px;
+    width: 90%;
+}
+
+.graph-chart-title{
+    width: 90%;
+    margin: 50px auto;
+    font-size: 18px;
+}
+
+.graph-item{
+    margin: auto;
+    padding-bottom: 30px;
+    margin-top: 100px;
+    height: auto;
+    width: 90%;
+}
+
+.game-overview-section-bottom{
+    width: 90%;
+    margin: auto;
+}
+
+.game-overview-section-time{
+    margin-top: 30px;
+}
+
+.game-result-card-competitorname{
+    overflow: hidden;
+    white-space: nowrap;
+}
