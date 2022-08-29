@@ -42,6 +42,10 @@ export const SKILLOPTIONLIST = [
         "引き胴"
 ]
 
+export const getSkillOption = () => {
+    
+}
+
 export const getUserName = (path) => {
     console.log(path)
     const slicePosition = path.indexOf('/', path.indexOf('/') + 1)

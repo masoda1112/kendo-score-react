@@ -33,6 +33,9 @@ const RecordGame =()=>{
     const [cookies, setCookie, removeCookie] = useCookies(["access_token"])
     const location = useLocation()
     const userName = getUserName(location.pathname)
+    // const [skillInfo, setSkillInfo] = useState("")
+    const [skillOptionList, setSkillOptionList] =  useState("")
+    const headers = {Authorization : 'Bearer ' + cookies.access_token}
 
     // 入力step制御
     const [count, setCount] = useState(0)
@@ -61,6 +64,17 @@ const RecordGame =()=>{
     const nextStepList = ["有効打の入力に進む", "相手の有効打の入力に進む", "有効打以外の入力に進む", "反則の入力に進む", "相手の反則の入力に進む", "送信"]
     const foulOptionList = ["選択してください", "場外反則", "竹刀落とし", "時間空費", "その他"]
 
+    useEffect(() => {
+        axios.get(LOCALBASEURL + "/" + userName + "/skills", {headers})
+        .then((response) => {
+            console.log("skillOptions",response["data"])
+            setSkillOptionList(response["data"])
+        })
+        .catch ((error) => {
+            console.error(error)
+        })
+    },[])
+
     const changeBtnString =()=>{
         if(count == 0){
             if(competitorName == "" || resultId == '' || gameTime == ""){
@@ -74,7 +88,6 @@ const RecordGame =()=>{
         }else if(count == 5){
             // ここでaxios.post
             // postのための準備
-            const headers = {Authorization : 'Bearer ' + cookies.access_token}
             
             const data = {
                 'competitor_name': competitorName,
@@ -179,17 +192,17 @@ const RecordGame =()=>{
                     </div>
                     <div className={(count != 1) ? "remove valid-attack-wrapper" : "valid-attack-wrapper"}>
                         <p className="modal-list-title">打った技（有効打突）</p>
-                        { modalListLoop(actionCount.validAttackCount, validAttackList, setValidAttackList, "有効打突", SKILLOPTIONLIST )}
+                        { modalListLoop(actionCount.validAttackCount, validAttackList, setValidAttackList, "有効打突", skillOptionList )}
                         <p className="add-modal-btn" onClick={() => addValidAttack()}>＋ 有効打突を追加する</p>
                     </div>
                     <div className={(count != 2) ? "remove competitor-attack-wrapper" : "foul-wrapper"}>
                         <p className="modal-list-title">打たれた技（有効打突）</p>
-                        { modalListLoop(actionCount.competitorAttackCount, competitorAttackList, setCompetitorAttackList, "打たれた技", SKILLOPTIONLIST )}
+                        { modalListLoop(actionCount.competitorAttackCount, competitorAttackList, setCompetitorAttackList, "打たれた技", skillOptionList )}
                         <p className="add-modal-btn" onClick={() => addCompetitorAttack()}>＋ 打たれた技を追加する</p>
                     </div>
                     <div className={(count != 3) ? "remove attack-wrapper" : "attack-wrapper"}>
                         <p className="modal-list-title">有効打にならなかった技</p>
-                        { modalListLoop(actionCount.attackCount, attackList, setAttackList, "打った技", SKILLOPTIONLIST )}
+                        { modalListLoop(actionCount.attackCount, attackList, setAttackList, "打った技", skillOptionList )}
                         <p className="add-attack-btn add-modal-btn" onClick={() => addAttack()}>＋ 有効打にならなかった技を追加する</p>
                     </div>
                     <div className={(count != 4) ? "remove foul-wrapper" : "foul-wrapper"}>

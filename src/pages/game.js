@@ -43,15 +43,11 @@ const Game =()=>{
     },[])
 
     useEffect(() => {
-        
         if(gameInfo){
-            setGraphDataStateCount(graphDataStateCount + 1)
-            if(graphDataStateCount == 1){
-                Object.keys(gameInfo.attack_list).forEach( function(v, index){
-                    const data = {name: v, 有効打: this[v]["有効打"], 無効打: this[v]["無効打"]}
-                    setGraphDataState((prevState)=> [...prevState, data])
-                }, gameInfo.attack_list)
-            }
+            Object.keys(gameInfo.attack_list).forEach( function(v, index){
+                const data = {name: v, 有効打: this[v]["有効打"], 無効打: this[v]["無効打"]}
+                setGraphDataState((prevState)=> [...prevState, data])
+            }, gameInfo.attack_list)
         }
     }, [gameInfo]);
 
@@ -66,7 +62,6 @@ const Game =()=>{
         })
     }
 
-    console.log(gameInfo)
 
     return (
         <div className="game">

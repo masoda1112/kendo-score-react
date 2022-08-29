@@ -13,6 +13,7 @@ const label = ({ name, value, cx, x, y }) => {
 }
 
 const BarGraphSection = ( props ) => {
+    console.log(props.data)
     return (
         <div className="graph-item">
             <h2 className='graph-chart-title'>{props.title}</h2>

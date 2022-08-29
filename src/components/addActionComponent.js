@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Select, MenuItem, InputLabel, FormControl} from '@mui/material'
 
 const AddActionComponent = ({index, array, setArray, actionName, actionList}) => {
@@ -15,12 +15,18 @@ const AddActionComponent = ({index, array, setArray, actionName, actionList}) =>
     }
 
     const addAction=(value)=>{
-        setAction(actionList[value])
+        console.log(value)
+        setAction(value["name"])
         setArray(
-            array.map((v, i) => (i === index ? value : v))
+            array.map((v, i) => (i === index ? value["id"] : v))
         )
-        setSelected(true)
     }
+
+    useEffect(() => {
+        if(action != 0) setSelected(true)
+    },[action])
+
+    console.log(array)
 
 
     return (
@@ -40,9 +46,9 @@ const AddActionComponent = ({index, array, setArray, actionName, actionList}) =>
                             fullWidth
                         >
                             {
-                                actionList.map((valueName, index) => {
+                                actionList.map((v, index) => {
                                     return (
-                                        <MenuItem key={index} value={index}>{valueName}</MenuItem>
+                                        <MenuItem key={index} value={v}>{v["name"]}</MenuItem>
                                     )
                                 })
                             }
