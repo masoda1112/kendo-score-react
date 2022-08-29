@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom"
-export const LOCALBASEURL = 'http://127.0.0.1:8000'
+// export const LOCALBASEURL = 'http://127.0.0.1:8000'
+export const LOCALBASEURL = 'https://kendo-score-book.herokuapp.com'
 
     // 技と反則の選択肢
 export const SKILLOPTIONLIST = [ 
