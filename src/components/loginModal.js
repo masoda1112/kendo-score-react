@@ -23,7 +23,6 @@ import { ModalContext } from "../pages/App"
 import { LOCALBASEURL } from "../utils/constants"
 import Validator from "./validator"
 
-
 const Login = () => {
     axios.defaults.withCredentials = true
     axios.defaults.headers.common['Content-Type'] = 'application/json'
@@ -85,10 +84,10 @@ const Login = () => {
               ログイン
             </Typography>
           </Grid>
-          <TextField label="Email" variant="standard" fullWidth required onChange={(e) => setEmail(e.target.value)}/>
+          <TextField label="メールアドレス" variant="standard" fullWidth required onChange={(e) => setEmail(e.target.value)}/>
           <TextField
             type="password"
-            label="Password"
+            label="パスワード（6文字以上）"
             variant="standard"
             fullWidth
             required

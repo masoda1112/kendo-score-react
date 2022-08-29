@@ -1,5 +1,5 @@
 import { Button , TextField, Select, MenuItem, InputLabel, FormControl, InputAdornment, LinearProgress} from '@mui/material'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import { useRouter } from 'next/router'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useCookies } from "react-cookie"
@@ -127,6 +127,8 @@ const RecordGame =()=>{
         setActionCount((prevState)=>({...prevState, competitorFoulCount: actionCount.competitorFoulCount + 1}))
         setCompetitorFoulList([...competitorFoulList, null])
     }
+
+    useEffect(() => {window.scrollTo(0, 0)}, []);
 
     return (
         <div className="addgame">

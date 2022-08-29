@@ -2,10 +2,7 @@ import React, { useState } from "react"
 import ReactDOM from 'react-dom/client'
 import App from './pages/App'
 import reportWebVitals from './reportWebVitals'
-import axios from "axios"
-import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import Layout from './components/layout'
 import './styles/globals.css'
 import './styles/Search.css'
 import './styles/index.css'

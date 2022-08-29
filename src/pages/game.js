@@ -38,6 +38,7 @@ const Game =()=>{
     const gameId = Number(location.pathname.substring(slicePosition + 1))
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         getRequest()
     },[])
 

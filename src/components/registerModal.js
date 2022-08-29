@@ -12,11 +12,11 @@ import {
     Typography
   } from "@mui/material"
 //   import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { teal } from "@mui/material/colors"
 import React, { useState, useContext } from 'react'
 import { ModalContext } from '../pages/App'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { useCookies } from "react-cookie"
+import firebaseApp from "../Firebase/firebase"
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 import { LOCALBASEURL } from "../utils/constants"
@@ -42,12 +42,15 @@ const Register = () => {
         createUserWithEmailAndPassword(auth, userEmail, userPassword)
         .then(async(userCredential) => {
             const firebaseUser = userCredential.user
+            context.setRegisterModalOpen(false)
             await registerServer(firebaseUser.accessToken)
             setValidator(false)
         })
         .catch((error) => {
             const errorCode = error.code
             const errorMessage = error.message
+            console.log(errorMessage)
+            context.setRegisterModalOpen(false)
             setValidator(true)
         });
     }
@@ -63,7 +66,6 @@ const Register = () => {
             'Authorization': token
         }
 
-
         axios.post(LOCALBASEURL + "/register", data, {headers})
         .then((response) => {
             setCookie("access_token",response.data.access_token)
@@ -73,23 +75,6 @@ const Register = () => {
             console.error(error)
         })
     }
-
-    // const closeRegister =()=> {
-    //     value.setRegisterModalOpen(false)
-    // }
-    // const data = JSON.stringify({
-    //     name: userName,
-    //     email: userEmail,
-    //     password: userPassword
-    // })
-
-    // const requestRegister =()=> {
-    //     axios.get(baseUrl + "/sanctum/csrf-cookie").then((response) => {
-    //         axios.post('/register', data).then(function (response) {console.log(response.data);})
-    //     }).catch(error => {
-            //     console.log(error);
-            // });
-    // }
 
     return (
       <Grid>
@@ -113,11 +98,11 @@ const Register = () => {
                 サインアップ
             </Typography>
           </Grid>
-          <TextField label="Username" variant="standard" fullWidth required  onChange={(e) => setName(e.target.value)}/>
-          <TextField label="Email" variant="standard" fullWidth required onChange={(e) => setEmail(e.target.value)}/>
+          <TextField label="名前" variant="standard" fullWidth required  onChange={(e) => setName(e.target.value)}/>
+          <TextField label="メールアドレス" variant="standard" fullWidth required onChange={(e) => setEmail(e.target.value)}/>
           <TextField
             type="password"
-            label="Password"
+            label="パスワード（６文字以上）"
             variant="standard"
             fullWidth
             required

@@ -5,7 +5,6 @@ import { Button } from '@mui/material'
 
 import React, { useState, useEffect } from 'react'
 
-// import CircleGraphSection from '../../components/circleGraphSection'
 import RatioItem from '../components/ratioItem'
 import { useCookies } from "react-cookie"
 import axios from 'axios'
@@ -14,19 +13,6 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { LOCALBASEURL, getUserName } from '../utils/constants'
 import CircleGraphSection from '../components/circleGraphSection'
 import BarGraphSection from '../components/barGraphSection'
-
-// const CircleGraphSection = dynamic(() => import("../../components/circleGraphSection"), { ssr: false });
-// const BarGraphSection = dynamic(() => import("../../components/barGraphSection"), { ssr: false });
-
-// export async function getStaticPaths() {
-//     return {
-//       paths: [
-//         { params: {userName} }
-//       ],
-//       fallback: true // false or 'blocking'
-//     };
-// }
-
 
 const Home = () => {
     // ここでapiリクエストで円グラフに使用するデータを取得し、配列に定義。
@@ -43,6 +29,7 @@ const Home = () => {
 
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         getRequest()
     },[])
 
@@ -65,6 +52,7 @@ const Home = () => {
             navigate("/")
         })
     }
+    
 
     const hashLoop = (hash, bar, graphId) =>{
         setGraphDataStateCount(graphDataStateCount + 1)

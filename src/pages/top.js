@@ -3,17 +3,10 @@ import { Button } from '@mui/material'
 import Discription from '../components/discription'
 import Login from '../components/loginModal'
 import Register from '../components/registerModal'
-import React, { useState, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { ModalContext } from './App'
 
-// export async function getStaticProps(context) {
-//   return {
-//     props: {}, // ページコンポーネントに props として渡されます。
-//   }
-// }
-
 const TopPage = () => {
-
   const discriptionArray = [
     {
       title : "一本を取る力",
@@ -43,6 +36,8 @@ const TopPage = () => {
     value.setRegisterModalOpen(true)
   }
 
+  useEffect(() => {window.scrollTo(0, 0)}, []);
+  
   return (
     <>
       

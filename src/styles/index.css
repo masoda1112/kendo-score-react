@@ -99,3 +99,7 @@
     text-align: right;
     margin: 0;
 }
+
+.no_scroll{
+    overflow: hidden;
+}
