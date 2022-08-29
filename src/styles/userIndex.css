@@ -1,8 +1,9 @@
 .home{
 }
 .home .top-section{
-    height: calc(100vh - 60px);
+    height: auto;
     padding-top: 60px;
+    padding-bottom: 60px;
     background-color:#efefef;
 }
 

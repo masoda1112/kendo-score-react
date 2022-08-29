@@ -40,9 +40,10 @@
     width: 100%;
 }
 .discription{
-    height: calc(70vh);
+    height: auto;
     width: 100%;
     padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .discription:nth-child(2n){
