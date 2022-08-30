@@ -15,7 +15,6 @@ const AddActionComponent = ({index, array, setArray, actionName, actionList}) =>
     }
 
     const addAction=(value)=>{
-        console.log(value)
         setAction(value["name"])
         setArray(
             array.map((v, i) => (i === index ? value["id"] : v))
@@ -26,7 +25,6 @@ const AddActionComponent = ({index, array, setArray, actionName, actionList}) =>
         if(action != 0) setSelected(true)
     },[action])
 
-    console.log(array)
 
 
     return (

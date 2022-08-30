@@ -34,8 +34,6 @@ const GameItem =(props)=> {
     const navigation = useNavigation()
     const userName = getUserName(location.pathname)
 
-    console.log(props.validAttacks)
-
     return (
         <div className="game-list-item-container" key={props.id} onClick={() => navigation("/" + userName + "/" + props.id)}>
             {/* <Link href={'/masahiro/' + props.id}><a className="game-list-item-id">{props.id}</a></Link> */}

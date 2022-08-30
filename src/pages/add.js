@@ -68,7 +68,6 @@ const RecordGame =()=>{
     useEffect(() => {
         axios.get(LOCALBASEURL + "/" + userName + "/skills", {headers})
         .then((response) => {
-            console.log("skillOptions",response["data"])
             setSkillOptionList(response["data"])
         })
         .catch ((error) => {
@@ -102,11 +101,8 @@ const RecordGame =()=>{
                 'competitor_fouls': competitorFoulList,
             }
             
-            console.log(data)
-            
             axios.post(LOCALBASEURL + "/" + userName + "/add", data, {headers})
             .then((response) => {
-                console.log(response)
                 navigate("/" + userName + "/games")
             })
             .catch ((error) => {

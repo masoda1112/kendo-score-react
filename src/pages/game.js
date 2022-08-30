@@ -46,11 +46,9 @@ const Game =()=>{
     useEffect(() => {
         if(gameInfo){
             if(gameInfo.attack_list.length != 0){
-                console.log("fire1")
                 setGraphDataLoop(gameInfo.attack_list, false)
             }
             if(gameInfo.competitor_attack_list.length != 0){
-                console.log("fire2")
                 setGraphDataLoop(gameInfo.competitor_attack_list, true)
             }
         }
@@ -75,7 +73,6 @@ const Game =()=>{
         })
     }
 
-    console.log(gameInfo)
 
     return (
         <div className="game">
