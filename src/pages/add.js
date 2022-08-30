@@ -102,6 +102,8 @@ const RecordGame =()=>{
                 'competitor_fouls': competitorFoulList,
             }
             
+            console.log(data)
+            
             axios.post(LOCALBASEURL + "/" + userName + "/add", data, {headers})
             .then((response) => {
                 console.log(response)

@@ -45,15 +45,21 @@ const Game =()=>{
 
     useEffect(() => {
         if(gameInfo){
-            if(gameInfo.attack_list)setGraphDataLoop(gameInfo.attack_list, false)
-            if(gameInfo.competitor_attack_list)setGraphDataLoop(gameInfo.competitor_attack_list, true)
+            if(gameInfo.attack_list.length != 0){
+                console.log("fire1")
+                setGraphDataLoop(gameInfo.attack_list, false)
+            }
+            if(gameInfo.competitor_attack_list.length != 0){
+                console.log("fire2")
+                setGraphDataLoop(gameInfo.competitor_attack_list, true)
+            }
         }
     }, [gameInfo]);
 
     const setGraphDataLoop = ($array, $competitor) => {
-        console.log(gameInfo)
+        console.log($array)
         Object.keys($array).forEach( function(v, index){
-            const data = {name: v, 有効打: this[v]["有効打"], 無効打: this[v]["無効打"]}
+            const data = {name: v, 有効打: this[v]["有効打"], 無効打: this[v]["無効打"]};
             ($competitor) ? setCompetitorGraphDataState((prevState)=> [...prevState, data]) : setGraphDataState((prevState)=> [...prevState, data])
         }, $array)
     }
