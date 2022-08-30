@@ -43,11 +43,10 @@ export const SKILLOPTIONLIST = [
 ]
 
 export const getSkillOption = () => {
-    
+
 }
 
 export const getUserName = (path) => {
-    console.log(path)
     const slicePosition = path.indexOf('/', path.indexOf('/') + 1)
     var userName = ""
     if(slicePosition != -1){ userName = path.substring( 1,  slicePosition)} else {userName = path.substring(1)}
