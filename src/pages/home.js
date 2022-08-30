@@ -45,14 +45,13 @@ const Home = () => {
         axios.get(LOCALBASEURL + "/" + userName, {headers})
         .then((response) => {
             setResData(response["data"])
-            console.log(response["data"])
         })
         .catch ((error) => {
             console.error(error)
             navigate("/")
         })
     }
-    
+
 
     const hashLoop = (hash, bar, graphId) =>{
         setGraphDataStateCount(graphDataStateCount + 1)

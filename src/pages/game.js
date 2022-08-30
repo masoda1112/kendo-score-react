@@ -55,7 +55,6 @@ const Game =()=>{
     }, [gameInfo]);
 
     const setGraphDataLoop = ($array, $competitor) => {
-        console.log($array)
         Object.keys($array).forEach( function(v, index){
             const data = {name: v, 有効打: this[v]["有効打"], 無効打: this[v]["無効打"]};
             ($competitor) ? setCompetitorGraphDataState((prevState)=> [...prevState, data]) : setGraphDataState((prevState)=> [...prevState, data])
