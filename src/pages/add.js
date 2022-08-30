@@ -45,7 +45,7 @@ const RecordGame =()=>{
 
     // 各Modalの個数
     const [actionCount, setActionCount] = useState(
-        {validAttackCount: 0, competitorAttackCount: 0, attackCount: 0, foulCount: 0, competitorFoulCount: 0}
+        {validAttackCount: 0, competitorValidAttackCount: 0, attackCount: 0, competitorAttackCount: 0, foulCount: 0, competitorFoulCount: 0}
     )
     
     // gameの基本情報（hashにしたらスッキリするかも）
@@ -55,13 +55,14 @@ const RecordGame =()=>{
 
     // 各Actionの一覧を格納（hashにしたらスッキリするかも）
     const [validAttackList, setValidAttackList] = useState([])
+    const [competitorValidAttackList, setCompetitorValidAttackList] = useState([])
     const [competitorAttackList, setCompetitorAttackList] = useState([])
     const [attackList, setAttackList] = useState([])
     const [foulList, setFoulList] = useState([])
     const [competitorFoulList, setCompetitorFoulList] = useState([])
 
     // buttonに表示する文字列と反則のリスト
-    const nextStepList = ["有効打の入力に進む", "相手の有効打の入力に進む", "有効打以外の入力に進む", "反則の入力に進む", "相手の反則の入力に進む", "送信"]
+    const nextStepList = ["有効打の入力に進む", "相手の有効打の入力に進む", "有効打以外の入力に進む", "相手の有効打以外の入力に進む", "反則の入力に進む", "相手の反則の入力に進む", "送信"]
     const foulOptionList = ["選択してください", "場外反則", "竹刀落とし", "時間空費", "その他"]
 
     useEffect(() => {
@@ -83,9 +84,9 @@ const RecordGame =()=>{
                 setInValid(false)
                 setCount(count + 1)
             }
-        }else if(count != 0 && count != 5){
+        }else if(count != 0 && count != 6){
             setCount(count + 1)
-        }else if(count == 5){
+        }else if(count == 6){
             // ここでaxios.post
             // postのための準備
             
@@ -95,6 +96,7 @@ const RecordGame =()=>{
                 'time': gameTime,
                 'valid_attacks': validAttackList,
                 'competitor_attacks': competitorAttackList,
+                'competitor_valid_attacks': competitorValidAttackList,
                 'attacks': attackList,
                 'fouls': foulList,
                 'competitor_fouls': competitorFoulList,
@@ -119,6 +121,11 @@ const RecordGame =()=>{
         // setValidAttackCount(validAttackCount + 1)
         setActionCount((prevState)=>({...prevState, validAttackCount: actionCount.validAttackCount + 1}))
         setValidAttackList([...validAttackList, null])
+    }
+
+    const addCompetitorValidAttack = () => {
+        setActionCount((prevState)=>({...prevState, competitorValidAttackCount: actionCount.competitorValidAttackCount + 1}))
+        setCompetitorValidAttackList([...competitorValidAttackList, null])
     }
 
     const addCompetitorAttack = () => {
@@ -147,7 +154,7 @@ const RecordGame =()=>{
         <div className="addgame">
             {/* ここに進捗具合がわかるメータを入れる */}
             <div className="addgame-container">
-                <LinearProgress value={count * 20} variant="determinate"/>
+                <LinearProgress value={count * (100 / 6)} variant="determinate"/>
                 <form>
                     <div className={(count != 0) ? "remove valid-attack-wrapper" : "valid-attack-wrapper"}>
                         <p className="modal-list-title">試合概要</p>
@@ -191,26 +198,31 @@ const RecordGame =()=>{
                         </div>
                     </div>
                     <div className={(count != 1) ? "remove valid-attack-wrapper" : "valid-attack-wrapper"}>
-                        <p className="modal-list-title">打った技（有効打突）</p>
+                        <p className="modal-list-title">自分の有効打突</p>
                         { modalListLoop(actionCount.validAttackCount, validAttackList, setValidAttackList, "有効打突", skillOptionList )}
                         <p className="add-modal-btn" onClick={() => addValidAttack()}>＋ 有効打突を追加する</p>
                     </div>
                     <div className={(count != 2) ? "remove competitor-attack-wrapper" : "foul-wrapper"}>
-                        <p className="modal-list-title">打たれた技（有効打突）</p>
-                        { modalListLoop(actionCount.competitorAttackCount, competitorAttackList, setCompetitorAttackList, "打たれた技", skillOptionList )}
-                        <p className="add-modal-btn" onClick={() => addCompetitorAttack()}>＋ 打たれた技を追加する</p>
+                        <p className="modal-list-title">相手の有効打突</p>
+                        { modalListLoop(actionCount.competitorValidAttackCount, competitorValidAttackList, setCompetitorValidAttackList, "相手の有効打突", skillOptionList )}
+                        <p className="add-modal-btn" onClick={() => addCompetitorValidAttack()}>＋ 相手の有効打を追加する</p>
                     </div>
                     <div className={(count != 3) ? "remove attack-wrapper" : "attack-wrapper"}>
                         <p className="modal-list-title">有効打にならなかった技</p>
                         { modalListLoop(actionCount.attackCount, attackList, setAttackList, "打った技", skillOptionList )}
                         <p className="add-attack-btn add-modal-btn" onClick={() => addAttack()}>＋ 有効打にならなかった技を追加する</p>
                     </div>
-                    <div className={(count != 4) ? "remove foul-wrapper" : "foul-wrapper"}>
+                    <div className={(count != 4) ? "remove attack-wrapper" : "attack-wrapper"}>
+                        <p className="modal-list-title">相手の有効打にならなかった技</p>
+                        { modalListLoop(actionCount.competitorAttackCount, competitorAttackList, setCompetitorAttackList, "打たれた技", skillOptionList )}
+                        <p className="add-attack-btn add-modal-btn" onClick={() => addCompetitorAttack()}>＋ 相手の有効打にならなかった技を追加する</p>
+                    </div>
+                    <div className={(count != 5) ? "remove foul-wrapper" : "foul-wrapper"}>
                         <p className="modal-list-title">反則</p>
                         { modalListLoop(actionCount.foulCount, foulList, setFoulList, "反則", foulOptionList )}
                         <p className="add-modal-btn" onClick={() => addFoul()}>＋ 反則を追加する</p>
                     </div>
-                    <div className={(count != 5) ? "remove competitor-foul-wrapper" : "foul-wrapper"}>
+                    <div className={(count != 6) ? "remove competitor-foul-wrapper" : "foul-wrapper"}>
                         <p className="modal-list-title">相手の反則</p>
                         { modalListLoop(actionCount.competitorFoulCount, competitorFoulList, setCompetitorFoulList, "相手の反則", foulOptionList )}
                         <p className="add-modal-btn" onClick={() => addCompetitorFoul()}>＋ 相手の反則を追加する</p>

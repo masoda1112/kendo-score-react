@@ -26,6 +26,7 @@ import CircleGraphSection from '../components/circleGraphSection'
 const Game =()=>{
     const [gameInfo, setGameInfo] = useState("")
     const [graphDataState, setGraphDataState] = useState([])
+    const [competitorGraphDataState, setCompetitorGraphDataState] = useState([])
     const [graphDataStateCount, setGraphDataStateCount] = useState(0)
     const location = useLocation()
     const userName = getUserName(location.pathname)
@@ -44,12 +45,17 @@ const Game =()=>{
 
     useEffect(() => {
         if(gameInfo){
-            Object.keys(gameInfo.attack_list).forEach( function(v, index){
-                const data = {name: v, 有効打: this[v]["有効打"], 無効打: this[v]["無効打"]}
-                setGraphDataState((prevState)=> [...prevState, data])
-            }, gameInfo.attack_list)
+            setGraphDataLoop(gameInfo.attack_list, false)
+            setGraphDataLoop(gameInfo.comeptitor_attack_list, true)
         }
     }, [gameInfo]);
+
+    const setGraphDataLoop = ($array, $competitor) => {
+        Object.keys($array).forEach( function(v, index){
+            const data = {name: v, 有効打: this[v]["有効打"], 無効打: this[v]["無効打"]}
+            ($competitor) ? setCompetitorGraphDataState((prevState)=> [...prevState, data]) : setGraphDataState((prevState)=> [...prevState, data])
+        }, $array)
+    }
 
     const getRequest = async() => {
         axios.get(LOCALBASEURL + "/" + userName + "/" + gameId,  {headers})
@@ -95,6 +101,7 @@ const Game =()=>{
                 </div>
             </div>
             <BarGraphSection title="出した技" data={graphDataState}/>
+            <BarGraphSection title="出された技" data={competitorGraphDataState}/>
         </div>
     )
 }
