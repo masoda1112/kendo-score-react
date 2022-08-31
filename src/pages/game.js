@@ -105,7 +105,6 @@ const Game =()=>{
                 </div>
             </div>
             <BarGraphSection title="出した技" data={graphDataState}/>
-            <BarGraphSection title="出された技" data={competitorGraphDataState}/>
         </div>
     )
 }

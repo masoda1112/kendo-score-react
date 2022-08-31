@@ -45,7 +45,7 @@ const RecordGame =()=>{
 
     // 各Modalの個数
     const [actionCount, setActionCount] = useState(
-        {validAttackCount: 0, competitorValidAttackCount: 0, attackCount: 0, competitorAttackCount: 0, foulCount: 0, competitorFoulCount: 0}
+        {validAttackCount: 0, competitorValidAttackCount: 0, attackCount: 0, defeatAttackCount: 0, foulCount: 0, competitorFoulCount: 0}
     )
     
     // gameの基本情報（hashにしたらスッキリするかも）
@@ -56,13 +56,13 @@ const RecordGame =()=>{
     // 各Actionの一覧を格納（hashにしたらスッキリするかも）
     const [validAttackList, setValidAttackList] = useState([])
     const [competitorValidAttackList, setCompetitorValidAttackList] = useState([])
-    const [competitorAttackList, setCompetitorAttackList] = useState([])
+    const [defeatAttackList, setDefeatAttackList] = useState([])
     const [attackList, setAttackList] = useState([])
     const [foulList, setFoulList] = useState([])
     const [competitorFoulList, setCompetitorFoulList] = useState([])
 
     // buttonに表示する文字列と反則のリスト
-    const nextStepList = ["有効打の入力に進む", "相手の有効打の入力に進む", "有効打以外の入力に進む", "相手の有効打以外の入力に進む", "反則の入力に進む", "相手の反則の入力に進む", "送信"]
+    const nextStepList = ["有効打の入力に進む", "相手の有効打の入力に進む", "敗因となった技の入力に進む", "有効打にならなかった技の入力に進む", "反則の入力に進む", "相手の反則の入力に進む", "送信"]
     const foulOptionList = ["選択してください", "場外反則", "竹刀落とし", "時間空費", "その他"]
 
     useEffect(() => {
@@ -94,7 +94,7 @@ const RecordGame =()=>{
                 'result_id': resultId,
                 'time': gameTime,
                 'valid_attacks': validAttackList,
-                'competitor_attacks': competitorAttackList,
+                'competitor_attacks': defeatAttackList,
                 'competitor_valid_attacks': competitorValidAttackList,
                 'attacks': attackList,
                 'fouls': foulList,
@@ -126,9 +126,9 @@ const RecordGame =()=>{
         setCompetitorValidAttackList([...competitorValidAttackList, null])
     }
 
-    const addCompetitorAttack = () => {
-        setActionCount((prevState)=>({...prevState, competitorAttackCount: actionCount.competitorAttackCount + 1}))
-        setCompetitorAttackList([...competitorAttackList, null])
+    const addDefeatAttack = () => {
+        setActionCount((prevState)=>({...prevState, defeatAttackCount: actionCount.defeatAttackCount + 1}))
+        setDefeatAttackList([...defeatAttackList, null])
     }
 
     const addAttack = () => {
@@ -206,14 +206,14 @@ const RecordGame =()=>{
                         <p className="add-modal-btn" onClick={() => addCompetitorValidAttack()}>＋ 相手の有効打を追加する</p>
                     </div>
                     <div className={(count != 3) ? "remove attack-wrapper" : "attack-wrapper"}>
+                        <p className="modal-list-title">敗因になった技</p>
+                        { modalListLoop(actionCount.defeatAttackCount, defeatAttackList, setDefeatAttackList, "敗因になった技", skillOptionList )}
+                        <p className="add-attack-btn add-modal-btn" onClick={() => addDefeatAttack()}>＋ 敗因になった技を追加する</p>
+                    </div>
+                    <div className={(count != 4) ? "remove attack-wrapper" : "attack-wrapper"}>
                         <p className="modal-list-title">有効打にならなかった技</p>
                         { modalListLoop(actionCount.attackCount, attackList, setAttackList, "打った技", skillOptionList )}
                         <p className="add-attack-btn add-modal-btn" onClick={() => addAttack()}>＋ 有効打にならなかった技を追加する</p>
-                    </div>
-                    <div className={(count != 4) ? "remove attack-wrapper" : "attack-wrapper"}>
-                        <p className="modal-list-title">相手の有効打にならなかった技</p>
-                        { modalListLoop(actionCount.competitorAttackCount, competitorAttackList, setCompetitorAttackList, "打たれた技", skillOptionList )}
-                        <p className="add-attack-btn add-modal-btn" onClick={() => addCompetitorAttack()}>＋ 相手の有効打にならなかった技を追加する</p>
                     </div>
                     <div className={(count != 5) ? "remove foul-wrapper" : "foul-wrapper"}>
                         <p className="modal-list-title">反則</p>
