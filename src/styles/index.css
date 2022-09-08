@@ -104,3 +104,14 @@
 .no_scroll{
     overflow: hidden;
 }
+
+.loading-animation{
+    position: fixed;
+    display: flex;
+    z-index: 1000;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items:center;
+}

@@ -44,13 +44,16 @@ const Home = () => {
     }, [resData]);
 
     const getRequest = () =>{
+        context.setIsLoading(true)
         axios.get(LOCALBASEURL + "/" + userName, {headers})
         .then((response) => {
             setResData(response["data"])
+            context.setIsLoading(false)
         })
         .catch ((error) => {
             console.error(error)
             console.log(error.message)
+            context.setIsLoading(false)
             navigate("/")
         })
     }
@@ -80,8 +83,9 @@ const Home = () => {
                     <AverageModal />
                 </div>
                 <div className="top-section-container">
-                    <RatioItem title="勝率" childCount={resData["winGameCount"]} parentCount={resData["totalGameCount"]} unit="%"/>
-                    <RatioItem title="敗率" childCount={resData["loseGameCount"]} parentCount={resData["totalGameCount"]} unit="%"/>
+                    {/* 一分あたりの被打率に変える？ */}
+                    {/* <RatioItem title="勝率" childCount={resData["winGameCount"]} parentCount={resData["totalGameCount"]} unit="%"/>
+                    <RatioItem title="敗率" childCount={resData["loseGameCount"]} parentCount={resData["totalGameCount"]} unit="%"/> */}
                     <RatioItem title="有効打突率" childCount={resData["validAttackCount"]} parentCount={resData["attackCount"]} unit="%"/>
                     <RatioItem title="1分あたりの手数" childCount={resData["attackCount"]} parentCount={resData["totalGameTime"]} unit="本"/>
                     <Button className="average-modal-open-btn" color="inherit" variant="contained" onClick={() => context.setAverageModalOpen(true)}>平均値を確認する +</Button>

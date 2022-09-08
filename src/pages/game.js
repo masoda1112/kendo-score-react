@@ -1,5 +1,5 @@
 // import BarGraphSection from "../../components/barGraphSection"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useCookies } from "react-cookie"
 // import dynamic from "next/dynamic"
 import axios from 'axios'
@@ -9,6 +9,7 @@ import { LOCALBASEURL, getUserName } from '../utils/constants'
 import { useNavigate, useLocation } from 'react-router-dom'
 import BarGraphSection from '../components/barGraphSection'
 import CircleGraphSection from '../components/circleGraphSection'
+import { ModalContext } from './App'
 
 // const CircleGraphSection = dynamic(() => import("../../components/circleGraphSection"), { ssr: false });
 // const BarGraphSection = dynamic(() => import("../../components/barGraphSection"), { ssr: false });
@@ -32,6 +33,7 @@ const Game =()=>{
     const userName = getUserName(location.pathname)
     const [cookies, setCookie, removeCookie] = useCookies(["access_token"])
     const headers = {Authorization : 'Bearer ' + cookies.access_token}
+    const context = useContext(ModalContext)
 
     // gameId取得
     const navigate = useNavigate()
@@ -62,13 +64,16 @@ const Game =()=>{
     }
 
     const getRequest = async() => {
+        context.setIsLoading(true)
         axios.get(LOCALBASEURL + "/" + userName + "/" + gameId,  {headers})
         .then((response) => {
             setGameInfo(response["data"])
+            context.setIsLoading(false)
         })
         .catch ((error) => {
             console.error(error)
             navigate("/")
+            context.setIsLoading(false)
         })
     }
 
@@ -86,7 +91,7 @@ const Game =()=>{
                         competitorValidAttacks={gameInfo.competitor_valid_attack_list}
                     />
                     <div className="game-overview-section-bottom">
-                        <p className="game-overview-section-time">{"試合時間: " + gameInfo.time + "秒"}</p>
+                        <p className="game-overview-section-time">{"試合時間: " + (gameInfo) ? gameInfo.time : 0 + "秒"}</p>
                         <p className="game-overview-section-foul">反則:
                             {
                             (!gameInfo.foul_list) ? <></> :

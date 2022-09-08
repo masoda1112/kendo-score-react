@@ -7,20 +7,23 @@ import RecordGame from './add'
 import Game from './game'
 import { CookiesProvider } from 'react-cookie'
 import Layout from '../components/layout'
+// import Loading from '../components/loading'
+import Loading from '../components/loading'
 export const ModalContext = React.createContext()
 
 function App() {
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const [registerModalOpen, setRegisterModalOpen] = useState(false)
   const [averageModalOpen, setAverageModalOpen] = useState(false)
+  const [ isLoading, setIsLoading ] = useState(false);
 
   useEffect(() => {
-    if(loginModalOpen || registerModalOpen || averageModalOpen){
+    if(loginModalOpen || registerModalOpen || averageModalOpen || isLoading){
       document.body.classList.add('no_scroll')
     }else{
       document.body.classList.remove('no_scroll')
     }
-  },[loginModalOpen, registerModalOpen, averageModalOpen])
+  },[loginModalOpen, registerModalOpen, averageModalOpen, isLoading])
 
   return (
     <div className="App">
@@ -31,9 +34,12 @@ function App() {
           registerModalOpen, 
           setRegisterModalOpen, 
           averageModalOpen,
-          setAverageModalOpen
+          setAverageModalOpen,
+          isLoading,
+          setIsLoading
         }}>
             <Router>
+            {(isLoading) ? <Loading /> : <></>}
             <Layout>
               <Routes>
                 <Route path='/' element={<TopPage />}/>

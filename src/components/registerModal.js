@@ -55,25 +55,28 @@ const Register = () => {
     }
 
     const registerServer = async(token) => {
-        const data = {
-            'name': userName,
-            'email': userEmail,
-            'password': userPassword
-        }
+      context.setIsLoading(true)
+      const data = {
+          'name': userName,
+          'email': userEmail,
+          'password': userPassword
+      }
 
-        const headers = {
-            'Authorization': token
-        }
+      const headers = {
+          'Authorization': token
+      }
 
-        axios.post(LOCALBASEURL + "/register", data, {headers})
-        .then((response) => {
-            setCookie("access_token",response.data.access_token)
-            navigate("/" + response.data.user_name)
-        })
-        .catch ((error) => {
-            console.log(error.message)
-            console.error(error)
-        })
+      axios.post(LOCALBASEURL + "/register", data, {headers})
+      .then((response) => {
+          setCookie("access_token",response.data.access_token)
+          navigate("/" + response.data.user_name)
+          context.setIsLoading(false)
+      })
+      .catch ((error) => {
+          console.log(error.message)
+          console.error(error)
+          context.setIsLoading(false)
+      })
     }
 
     return (

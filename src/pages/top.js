@@ -40,7 +40,6 @@ const TopPage = () => {
   
   return (
     <>
-      
       <div className={(value.loginModalOpen) ? "login-modal" : "hide login-modal"}>
         <Login />
       </div>

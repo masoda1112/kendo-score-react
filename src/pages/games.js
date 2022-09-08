@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useCookies } from "react-cookie"
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios'
 
 // import GameItem from "../../components/gameItem"
+import { ModalContext } from './App';
 import { LOCALBASEURL, getUserName } from '../utils/constants'
 import GameOverView from '../components/gameOverView';
 
@@ -14,6 +15,7 @@ const Games =(props)=>{
     const [cookies, setCookie, removeCookie] = useCookies(["access_token"])
     const headers = {Authorization : 'Bearer ' + cookies.access_token}
     const navigate = useNavigate()
+    const context = useContext(ModalContext)
     
     useEffect(() => {
         window.scrollTo(0,0)
@@ -21,14 +23,17 @@ const Games =(props)=>{
     },[])
 
     const getRequest = () => {
+        context.setIsLoading(true)
         axios.get(LOCALBASEURL + "/" + userName + "/games", {headers})
         .then((response) => {
             setGameList(response["data"]["games"])
+            context.setIsLoading(false)
         })
         .catch ((error) => {
             console.error(error)
             console.log(error.message)
             navigate("/")
+            context.setIsLoading(false)
         })
     }
 

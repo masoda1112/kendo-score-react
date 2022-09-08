@@ -39,6 +39,7 @@ const Login = () => {
     }
 
     const requestLogin =()=> {
+        context.setIsLoading(true)  
         if(userEmail == "" || userPassword == "") setValidator(true) 
 
         const data = {
@@ -54,10 +55,12 @@ const Login = () => {
             setCookie("access_token",response.data.access_token)
             navigate("/" + response.data.user_name)
             setValidator(false)
+            context.setIsLoading(false)
             context.setLoginModalOpen(false)
         })
         .catch ((error) => {
             console.error(error)
+            context.setIsLoading(false)
             setValidator(true)
         })
     }
