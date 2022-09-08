@@ -71,6 +71,7 @@ const Register = () => {
             navigate("/" + response.data.user_name)
         })
         .catch ((error) => {
+            console.log(error.message)
             console.error(error)
         })
     }
@@ -117,10 +118,10 @@ const Register = () => {
             <Button type="submit" color="primary" variant="contained" fullWidth onClick={() => requestRegister()}>
                 サインアップ
             </Button>
-            <Typography variant="caption" display="block">
+            {/* <Typography variant="caption" display="block">
               アカウントを持っていますか？
               <Link href="#">ログイン</Link>
-            </Typography>
+            </Typography> */}
           </Box>
         </Paper>
       </Grid>

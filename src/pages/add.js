@@ -62,7 +62,7 @@ const RecordGame =()=>{
     const [competitorFoulList, setCompetitorFoulList] = useState([])
 
     // buttonに表示する文字列と反則のリスト
-    const nextStepList = ["有効打の入力に進む", "相手の有効打の入力に進む", "敗因となった技の入力に進む", "有効打にならなかった技の入力に進む", "反則の入力に進む", "相手の反則の入力に進む", "送信"]
+    const nextStepList = ["有効打の入力に進む", "相手の有効打の入力に進む", "打たれる原因になった技の入力に進む", "有効打にならなかった技の入力に進む", "反則の入力に進む", "相手の反則の入力に進む", "送信"]
     const foulOptionList = ["選択してください", "場外反則", "竹刀落とし", "時間空費", "その他"]
 
     useEffect(() => {
@@ -94,12 +94,14 @@ const RecordGame =()=>{
                 'result_id': resultId,
                 'time': gameTime,
                 'valid_attacks': validAttackList,
-                'competitor_attacks': defeatAttackList,
+                'defeat_attacks': defeatAttackList,
                 'competitor_valid_attacks': competitorValidAttackList,
                 'attacks': attackList,
                 'fouls': foulList,
                 'competitor_fouls': competitorFoulList,
             }
+
+            console.log(data)
             
             axios.post(LOCALBASEURL + "/" + userName + "/add", data, {headers})
             .then((response) => {
@@ -206,9 +208,9 @@ const RecordGame =()=>{
                         <p className="add-modal-btn" onClick={() => addCompetitorValidAttack()}>＋ 相手の有効打を追加する</p>
                     </div>
                     <div className={(count != 3) ? "remove attack-wrapper" : "attack-wrapper"}>
-                        <p className="modal-list-title">敗因になった技</p>
+                        <p className="modal-list-title">打たれる原因になった技</p>
                         { modalListLoop(actionCount.defeatAttackCount, defeatAttackList, setDefeatAttackList, "敗因になった技", skillOptionList )}
-                        <p className="add-attack-btn add-modal-btn" onClick={() => addDefeatAttack()}>＋ 敗因になった技を追加する</p>
+                        <p className="add-attack-btn add-modal-btn" onClick={() => addDefeatAttack()}>＋ 打たれる原因になった技を追加する</p>
                     </div>
                     <div className={(count != 4) ? "remove attack-wrapper" : "attack-wrapper"}>
                         <p className="modal-list-title">有効打にならなかった技</p>

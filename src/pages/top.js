@@ -50,7 +50,7 @@ const TopPage = () => {
       <div className='top-page'>
         <div className='top-section'>
           <div className='top-section-container'>
-            <h1 className="top-section-title">剣道を科学しよう。</h1>
+            <h1 className="top-section-title">試合を振り返ろう。</h1>
             <p className="top-section-description white">スコア表に残らない、一本にはならなかった技。それらを記録することで、新たな気づきが得られるかもしれません。</p>
             <Button variant="contained" onClick={() => onClickRegister()}>無料登録</Button>
           </div>

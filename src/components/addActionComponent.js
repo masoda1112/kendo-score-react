@@ -25,8 +25,6 @@ const AddActionComponent = ({index, array, setArray, actionName, actionList}) =>
         if(action != 0) setSelected(true)
     },[action])
 
-
-
     return (
         <div className={(remove) ? 'remove' : 'action-component'}>
             <p className="close-btn" onClick={classToggle}>×</p>

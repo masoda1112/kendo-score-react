@@ -26,6 +26,7 @@ const BarGraphSection = ( props ) => {
                     <Legend />
                     <Bar dataKey="無効打" stackId="a" fill="#8884d8"/>
                     <Bar dataKey="有効打" stackId="a" fill="#82ca9d" />
+                    <Bar dataKey="被有効打" stackId="a" fill="red" />
                 </BarChart>
             }
         </div>

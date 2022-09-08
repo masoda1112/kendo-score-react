@@ -100,13 +100,13 @@ const Login = () => {
               ログイン
             </Button>
   
-            <Typography variant="caption">
+            {/* <Typography variant="caption">
               <Link href="#">パスワードを忘れましたか？</Link>
             </Typography>
             <Typography variant="caption" display="block">
               アカウントを持っていますか？
               <Link href="#">アカウントを作成</Link>
-            </Typography>
+            </Typography> */}
           </Box>
         </Paper>
       </Grid>

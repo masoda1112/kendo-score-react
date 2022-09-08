@@ -12,14 +12,15 @@ export const ModalContext = React.createContext()
 function App() {
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const [registerModalOpen, setRegisterModalOpen] = useState(false)
+  const [averageModalOpen, setAverageModalOpen] = useState(false)
 
   useEffect(() => {
-    if(loginModalOpen || registerModalOpen){
+    if(loginModalOpen || registerModalOpen || averageModalOpen){
       document.body.classList.add('no_scroll')
     }else{
       document.body.classList.remove('no_scroll')
     }
-  },[loginModalOpen, registerModalOpen])
+  },[loginModalOpen, registerModalOpen, averageModalOpen])
 
   return (
     <div className="App">
@@ -29,6 +30,8 @@ function App() {
           setLoginModalOpen,
           registerModalOpen, 
           setRegisterModalOpen, 
+          averageModalOpen,
+          setAverageModalOpen
         }}>
             <Router>
             <Layout>

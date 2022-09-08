@@ -3,7 +3,7 @@ import Register from '../components/registerModal'
 import Discription from '../components/discription'
 import { Button } from '@mui/material'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 import RatioItem from '../components/ratioItem'
 import { useCookies } from "react-cookie"
@@ -13,6 +13,8 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { LOCALBASEURL, getUserName } from '../utils/constants'
 import CircleGraphSection from '../components/circleGraphSection'
 import BarGraphSection from '../components/barGraphSection'
+import AverageModal from '../components/averageModal'
+import { ModalContext } from './App'
 
 const Home = () => {
     // ここでapiリクエストで円グラフに使用するデータを取得し、配列に定義。
@@ -26,7 +28,7 @@ const Home = () => {
     const userName = getUserName(location.pathname)
     const headers = {Authorization : 'Bearer ' + cookies.access_token}
     const navigate = useNavigate()
-
+    const context = useContext(ModalContext)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -48,6 +50,7 @@ const Home = () => {
         })
         .catch ((error) => {
             console.error(error)
+            console.log(error.message)
             navigate("/")
         })
     }
@@ -58,7 +61,7 @@ const Home = () => {
         if(graphDataStateCount == 1){
             Object.keys(hash).forEach( function(v, index){
                 let data = {name: v, value: this[v]}
-                if(bar) data = {name: v, 有効打: this[v]["有効打"], 無効打: this[v]["無効打"]}
+                if(bar) data = {name: v, 有効打: this[v]["有効打"], 無効打: this[v]["無効打"], 被有効打: this[v]["被有効打"]}
                 if(graphId == 1){
                     setCircleGraphData((prevState)=> [...prevState, data])
                 }else if(graphId == 2){
@@ -73,11 +76,15 @@ const Home = () => {
     return (
         <div className="home">
             <div className="top-section">
+                <div className={(context.averageModalOpen) ? "average-modal" : "hide average-modal"}>
+                    <AverageModal />
+                </div>
                 <div className="top-section-container">
                     <RatioItem title="勝率" childCount={resData["winGameCount"]} parentCount={resData["totalGameCount"]} unit="%"/>
                     <RatioItem title="敗率" childCount={resData["loseGameCount"]} parentCount={resData["totalGameCount"]} unit="%"/>
                     <RatioItem title="有効打突率" childCount={resData["validAttackCount"]} parentCount={resData["attackCount"]} unit="%"/>
                     <RatioItem title="1分あたりの手数" childCount={resData["attackCount"]} parentCount={resData["totalGameTime"]} unit="本"/>
+                    <Button className="average-modal-open-btn" color="inherit" variant="contained" onClick={() => context.setAverageModalOpen(true)}>平均値を確認する +</Button>
                 </div>
             </div>
             <CircleGraphSection title="打った技の構成" data={circleGraphData}/>

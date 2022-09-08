@@ -72,3 +72,23 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
+.average-modal{
+    z-index: 100;
+    position: fixed;
+    top: 20px;
+    left: calc(10vw / 2);
+    background-color: white;
+    width: 90vw;
+    border-radius: 20px;
+    padding: 20px;
+    height: auto;
+}
+.average-modal-open-btn{
+    text-align: center;
+    overflow: hidden;
+}
+
+.average-rate-title{
+    margin-bottom: 30px;
+}

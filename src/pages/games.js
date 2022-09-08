@@ -27,6 +27,7 @@ const Games =(props)=>{
         })
         .catch ((error) => {
             console.error(error)
+            console.log(error.message)
             navigate("/")
         })
     }
