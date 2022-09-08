@@ -12,7 +12,7 @@ const Footer =()=> {
         <div className="footer">
             <div className="footer-inner">
                 <Button fullWidth variant="contained" color="error" onClick={() => logout()}>ログアウト</Button>
-                <p className="copy-light">Copyright © 2022 Masahiro Odakura All Rights Reserved</p>
+                <p className="copy-light">Copyright © 2022 Kendo Score Book All Rights Reserved</p>
             </div>
         </div>
     )
