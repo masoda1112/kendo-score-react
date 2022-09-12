@@ -9,24 +9,14 @@ import { ModalContext } from './App'
 const TopPage = () => {
   const discriptionArray = [
     {
-      title : "一本を取る力",
-      description: "1分あたりどのくらいの技を出しているのか、出した技はどのくらいの確率で一本になるのか数値にして把握することができます。",
-      image: "/img/attackCountImg.png"
-    },
-    {
-      title : "有効打となる確率",
-      description: "自分が出した技の内どのくらいの数が有効打となっているのか、数値にして把握することができます。",
-      image: "/img/skillValidCount.png"
-    },
-    {
-      title : "出した技の構成比",
-      description: "自分がどの技をどのくらい繰り出しているのか、円グラフで視覚的に把握できます。",
+      title : "有効打の構成比",
+      description: "自分がどのような技で一本を取得しているか、どのような技を打たれやすのかを円グラフで視覚的に把握できます。",
       image: "/img/skillRate.png"
     },
     {
-      title : "打たれた技の構成比",
-      description: "自分がどのような技を打たれやすいのか、円グラフで視覚的に把握できます。",
-      image: "/img/competitorAttackRate.png"
+      title : "機会の構成比",
+      description: "自分がどのような機会に一本を取得しているか、どのような機会に打たれやすいのかを円グラフで視覚的に把握できます。",
+      image: "/img/opportunity.png"
     }
   ]
 
@@ -49,8 +39,8 @@ const TopPage = () => {
       <div className='top-page'>
         <div className='top-section'>
           <div className='top-section-container'>
-            <h1 className="top-section-title">試合を振り返ろう。</h1>
-            <p className="top-section-description white">スコア表に残らない、一本にはならなかった技。それらを記録することで、新たな気づきが得られるかもしれません。</p>
+            <h1 className="top-section-title">少し踏み込んだスコア表</h1>
+            <p className="top-section-description white">スコア表に打突の機会まで記録することで、課題を明確化します。</p>
             <Button variant="contained" onClick={() => onClickRegister()}>無料登録</Button>
           </div>
         </div>

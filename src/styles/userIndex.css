@@ -73,7 +73,7 @@
     white-space: nowrap;
 }
 
-.average-modal{
+/* .all-user-modal{
     z-index: 100;
     position: fixed;
     top: 100px;
@@ -83,12 +83,23 @@
     border-radius: 20px;
     padding: 20px;
     height: auto;
+} */
+
+.all-user-page{
+    /* padding: 20px; */
+    padding-top: 50px;
 }
-.average-modal-open-btn{
+.all-user-modal-open-btn{
     text-align: center;
     overflow: hidden;
 }
 
-.average-rate-title{
+.all-user-rate-title{
+    width: 90%;
+    margin: auto;
     margin-bottom: 30px;
 }
+/* 
+.all-user-link{
+    color: blue;
+} */

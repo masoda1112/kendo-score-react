@@ -55,6 +55,11 @@
     width: 25%;
     overflow: hidden;
 }
+.game-result-card-name{
+    height: auto;
+    white-space: nowrap;
+    overflow: hidden;
+}
 .game-result-card-right{
     /* text-align: right; */
 }

@@ -1,16 +1,16 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { getUserName } from '../utils/constants'
 
-const attackToNickName =($value)=>{
-    if($value == "面"){
-        return "メ"
-    }else if($value == "小手"){
-        return "コ"
-    }else if($value == "胴"){
-        return "ド"
+const attackToNickName =(value, index)=>{
+    if(value == "面"){
+        return (index == 0) ? "㋱" :  "メ"
+    }else if(value == "小手"){
+        return  (index == 0) ? "㋙" :  "コ"
+    }else if(value == "胴"){
+        return  (index == 0) ? "㋣" :  "ド"
     }
-    else if($value == "突き"){
-        return "ツ"
+    else if(value == "突き"){
+        return  (index == 0) ? "㋡" :  "ツ"
     }else{
         return "？"
     }
@@ -29,9 +29,11 @@ const GameOverView = (props) => {
                     <p className="game-result-card-name">{userName}</p>
                     <div className="game-result-card-attacks">
                         {
-                            (!props.validAttacks) ? <div></div> :
-                            props.validAttacks.map((value, index)=> {
-                                return <p className="game-result-card-validattack" key={index}>{attackToNickName(value)}</p>
+                            (!props.attacks) ? <div></div> :
+                            props.attacks.map((value, index)=> {
+                                if(value.competitor == 0) {
+                                    return <p className="game-result-card-validattack" key={index}>{attackToNickName(value.part, index)}</p>
+                                }
                             })
                         }
                     </div>
@@ -43,9 +45,11 @@ const GameOverView = (props) => {
                     <p className="game-result-card-competitorname">{props.competitorName}</p>
                     <div className="game-result-card-attacks">
                         {    
-                            (!props.competitorValidAttacks) ? <div></div> :
-                            props.competitorValidAttacks.map((value, index)=> {
-                                return <p className="game-result-card-validattack" key={index}>{attackToNickName(value)}</p>
+                            (!props.attacks) ? <div></div> :
+                            props.attacks.map((value, index)=> {
+                                if(value.competitor != 0) {
+                                    return <p className="game-result-card-validattack" key={index}>{attackToNickName(value.part, index)}</p>
+                                }
                             })
                         }
                     </div>

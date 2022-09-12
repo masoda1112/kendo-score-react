@@ -21,7 +21,7 @@ const BarGraphSection = ( props ) => {
                 <BarChart width={300} height={300} data={props.data} margin={{ top: 20, right: 30, left: 20, bottom: 5}}>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <XAxis dataKey="name" />
-                    <YAxis type="number"　domain={[0, 5]}/>
+                    <YAxis type="number" domain={[0, 5]}/>
                     <Tooltip />
                     <Legend />
                     <Bar dataKey="無効打" stackId="a" fill="#8884d8"/>

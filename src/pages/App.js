@@ -9,21 +9,21 @@ import { CookiesProvider } from 'react-cookie'
 import Layout from '../components/layout'
 // import Loading from '../components/loading'
 import Loading from '../components/loading'
+import AllUserData from './allUserData'
 export const ModalContext = React.createContext()
 
 function App() {
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const [registerModalOpen, setRegisterModalOpen] = useState(false)
-  const [averageModalOpen, setAverageModalOpen] = useState(false)
   const [ isLoading, setIsLoading ] = useState(false);
 
   useEffect(() => {
-    if(loginModalOpen || registerModalOpen || averageModalOpen || isLoading){
+    if(loginModalOpen || registerModalOpen || isLoading){
       document.body.classList.add('no_scroll')
     }else{
       document.body.classList.remove('no_scroll')
     }
-  },[loginModalOpen, registerModalOpen, averageModalOpen, isLoading])
+  },[loginModalOpen, registerModalOpen, isLoading])
 
   return (
     <div className="App">
@@ -33,8 +33,6 @@ function App() {
           setLoginModalOpen,
           registerModalOpen, 
           setRegisterModalOpen, 
-          averageModalOpen,
-          setAverageModalOpen,
           isLoading,
           setIsLoading
         }}>
@@ -47,6 +45,7 @@ function App() {
                 <Route path='/:user/games' element={<Games />}/>
                 <Route path='/:user/:game' element={<Game />}/>
                 <Route path='/:user/add' element={<RecordGame />}/>
+                <Route path='/:user/allUser' element={<AllUserData />}/>
               </Routes>
             </Layout>
             </Router>

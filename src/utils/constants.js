@@ -50,5 +50,6 @@ export const getUserName = (path) => {
     const slicePosition = path.indexOf('/', path.indexOf('/') + 1)
     var userName = ""
     if(slicePosition != -1){ userName = path.substring( 1,  slicePosition)} else {userName = path.substring(1)}
-    return userName
+    
+    return decodeURI(userName)
 }

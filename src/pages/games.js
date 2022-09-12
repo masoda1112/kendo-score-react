@@ -37,6 +37,8 @@ const Games =(props)=>{
         })
     }
 
+    console.log(gameList)
+
 
     return (
         <div className="games">
@@ -54,8 +56,8 @@ const Games =(props)=>{
                                     id={item.id} 
                                     userName={userName}
                                     competitorName={item.competitor_name}
-                                    competitorValidAttacks={item.competitor_valid_attack}
-                                    validAttacks={item.valid_attack}
+                                    // competitorValidAttacks={item.competitor_valid_attack}
+                                    attacks={item.valid_attack}
                                     date={item.date}
                                 />
                             </div>
